@@ -29,7 +29,12 @@ app = FastAPI(title="Weather AI API", version="0.2.0")
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origin_regex=r"http://localhost:\d+",  # any localhost port, for dev
+    allow_origins=[
+        "http://localhost:5173",
+        "http://localhost:5174",
+        "https://weather-ai-mocha.vercel.app",
+        "https://weather-ai-mocha.vercel.app/",
+    ],
     allow_methods=["*"],
     allow_headers=["*"],
 )
