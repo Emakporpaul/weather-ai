@@ -86,4 +86,4 @@ weather-ai/
 
 ---
 
-Built by [Paulo](https://github.com/Emakporpaul) — born from a rainy morning and wet clothes.
+Built by [Emakpor Paul](https://github.com/Emakporpaul) — born from a rainy morning and wet clothes.
