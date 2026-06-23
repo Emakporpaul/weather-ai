@@ -56,22 +56,37 @@ def health():
 
 @app.get("/api/geocode")
 async def geocode(city: str):
-    """Convert city name → lat/lon using OWM Geocoding API"""
+    """
+    Convert city/country name → lat/lon using OWM Geocoding API.
+    Returns the top match but also includes the full name with country
+    so the frontend can show the user exactly what was matched —
+    preventing silent wrong-country results (e.g. Ghana → India).
+    """
     async with httpx.AsyncClient() as client:
         res = await client.get(
             "https://api.openweathermap.org/geo/1.0/direct",
-            params={"q": city, "limit": 1, "appid": OWM_KEY}
+            params={"q": city, "limit": 5, "appid": OWM_KEY}
         )
         data = res.json()
         if not data:
-            raise HTTPException(status_code=404, detail="City not found")
+            raise HTTPException(status_code=404, detail="Location not found")
         place = data[0]
+        name = place["name"]
+        country = place.get("country", "")
+        state = place.get("state", "")
+        # Build a full display name so the user always sees what was matched
+        display_parts = [name]
+        if state and state != name:
+            display_parts.append(state)
+        if country:
+            display_parts.append(country)
         return {
             "lat": place["lat"],
             "lon": place["lon"],
-            "name": place["name"],
-            "country": place.get("country", ""),
-            "state": place.get("state", ""),
+            "name": name,
+            "country": country,
+            "state": state,
+            "display_name": ", ".join(display_parts),
         }
 
 

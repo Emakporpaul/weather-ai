@@ -2,6 +2,7 @@
  * DetailsPage — full weather details grid, MSN-style.
  * Every value here comes from data we already fetch — no new API calls needed.
  */
+import { convertTemp, convertWindSpeed } from '../utils/formatters'
 
 function DetailCard({ title, value, unit, subtitle, badge }) {
   return (
@@ -32,8 +33,8 @@ export default function DetailsPage({ data, airQuality, uvIndex, unit }) {
       <p className="font-display text-lg text-dash-text">Weather details</p>
 
       <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-        <DetailCard title="Temperature" value={current.temp} unit={tempLabel} subtitle={`Feels like ${current.feels_like}°`} />
-        <DetailCard title="Wind" value={current.wind_speed} unit={speedLabel} subtitle={`From ${current.wind_deg}°`} />
+        <DetailCard title="Temperature" value={convertTemp(current.temp, unit)} unit={tempLabel} subtitle={`Feels like ${convertTemp(current.feels_like, unit)}°`} />
+        <DetailCard title="Wind" value={convertWindSpeed(current.wind_speed, unit)} unit={speedLabel} subtitle={`From ${current.wind_deg}°`} />
         <DetailCard title="Humidity" value={current.humidity} unit="%" />
         <DetailCard title="Pressure" value={current.pressure} unit="mb" />
         <DetailCard title="Visibility" value={current.visibility.toFixed(1)} unit="km" />

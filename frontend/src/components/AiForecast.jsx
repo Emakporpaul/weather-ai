@@ -45,9 +45,6 @@ export default function AiForecast({ weatherData }) {
     <div className="bg-dash-panel border border-dash-border rounded-2xl p-5">
       <div className="flex items-center gap-2 mb-3">
         <p className="font-body text-xs text-dash-muted">AI forecast</p>
-        <span className="text-[10px] font-body text-dash-accent bg-dash-accent/10 px-2 py-0.5 rounded-full">
-          Gemini
-        </span>
       </div>
 
       {error && <p className="text-sm text-red-400 font-body">{error}</p>}

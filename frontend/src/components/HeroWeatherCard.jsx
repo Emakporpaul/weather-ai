@@ -1,5 +1,5 @@
 import WeatherIcon from './WeatherIcon'
-import { getConditionCategory } from '../utils/formatters'
+import { getConditionCategory, convertTemp, convertWindSpeed } from '../utils/formatters'
 
 /**
  * HeroWeatherCard — dashboard version of the current conditions panel.
@@ -14,9 +14,9 @@ export default function HeroWeatherCard({ data, unit }) {
   const speedLabel = unit === 'metric' ? 'km/h' : 'mph'
 
   const stats = [
-    { label: 'Wind', value: `${current.wind_speed} ${speedLabel}` },
+    { label: 'Wind', value: `${convertWindSpeed(current.wind_speed, unit)} ${speedLabel}` },
     { label: 'Humidity', value: `${current.humidity}%` },
-    { label: 'Feels like', value: `${current.feels_like}°` },
+    { label: 'Feels like', value: `${convertTemp(current.feels_like, unit)}°` },
     { label: 'Visibility', value: `${current.visibility.toFixed(1)} km` },
     { label: 'Pressure', value: `${current.pressure} mb` },
   ]
@@ -38,7 +38,7 @@ export default function HeroWeatherCard({ data, unit }) {
         <WeatherIcon category={category} size={64} />
         <div>
           <div className="font-display text-5xl font-light text-dash-text leading-none">
-            {current.temp}<span className="text-3xl align-top">{unitLabel}</span>
+            {convertTemp(current.temp, unit)}<span className="text-3xl align-top">{unitLabel}</span>
           </div>
           <p className="font-body text-sm text-dash-muted capitalize mt-1">{current.condition}</p>
         </div>
