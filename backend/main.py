@@ -1,6 +1,6 @@
 """
 Weather AI — FastAPI Backend
-Phase 2: Real OpenWeatherMap data + Gemini AI forecast with streaming
+Real OpenWeatherMap data + Gemini AI forecast with streaming
 """
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
@@ -40,7 +40,7 @@ app.add_middleware(
 )
 
 
-# ─── Health ───────────────────────────────────────────
+# Health
 
 @app.get("/")
 def root():
@@ -52,7 +52,7 @@ def health():
     return {"status": "ok"}
 
 
-# ─── Geocoding ────────────────────────────────────────
+# Geocoding
 
 @app.get("/api/geocode")
 async def geocode(city: str):
@@ -94,7 +94,7 @@ async def reverse_geocode(lat: float, lon: float):
         }
 
 
-# ─── Weather Data ─────────────────────────────────────
+# Weather Data
 
 @app.get("/api/weather")
 async def get_weather(lat: float, lon: float):
@@ -159,7 +159,7 @@ async def get_weather(lat: float, lon: float):
     }
 
 
-# ─── Air Quality ──────────────────────────────────────
+# Air Quality
 
 AQI_LABELS = {1: "Good", 2: "Fair", 3: "Moderate", 4: "Poor", 5: "Very Poor"}
 
@@ -184,7 +184,7 @@ async def get_air_quality(lat: float, lon: float):
         }
 
 
-# ─── UV Index (estimated) ─────────────────────────────
+# UV Index (estimated)
 #
 # OWM's free UV endpoint was retired in 2021; live UV now requires a paid
 # One Call 3.0 subscription (credit card required), which we're avoiding.
@@ -226,7 +226,7 @@ async def get_uv_index(lat: float, lon: float):
     return {"uvi": uvi, "available": True, "estimated": True}
 
 
-# ─── Daily Forecast (derived from free 5-day/3hr data) ─
+# Daily Forecast (derived from free 5-day/3hr data)
 
 @app.get("/api/daily-forecast")
 async def get_daily_forecast(lat: float, lon: float):
@@ -269,7 +269,7 @@ async def get_daily_forecast(lat: float, lon: float):
     return {"daily": daily}
 
 
-# ─── AI Forecast (Streaming) ──────────────────────────
+# AI Forecast (Streaming)
 
 class ForecastRequest(BaseModel):
     weather: dict
