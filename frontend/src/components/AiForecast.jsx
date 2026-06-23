@@ -51,7 +51,7 @@ export default function AiForecast({ weatherData }) {
 
       {!parsed && !error && (
         <p className="font-body text-[15px] leading-relaxed text-dash-text/90 whitespace-pre-wrap">
-          {rawText || (loading ? 'Thinking it through...' : '')}
+          {rawText.replace(/```json|```/g, '').trim() || (loading ? 'Generating your forecast...' : '')}
           {loading && <span className="inline-block w-1.5 h-4 bg-dash-muted ml-0.5 animate-pulse" />}
         </p>
       )}
