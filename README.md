@@ -2,8 +2,8 @@
 
 > Real-time AI-powered weather dashboard for any city, state, or country on earth.
 
-**🌐 Live app → [weather-ai-mocha.vercel.app](https://weather-ai-mocha.vercel.app)**
-**📦 Repository → [github.com/Emakporpaul/weather-ai](https://github.com/Emakporpaul/weather-ai)**
+** Live app → [weather-ai-mocha.vercel.app](https://weather-ai-mocha.vercel.app)**
+** Repository → [github.com/Emakporpaul/weather-ai](https://github.com/Emakporpaul/weather-ai)**
 
 ---
 
@@ -118,4 +118,4 @@ A few deliberate decisions made during the build:
 
 ---
 
-Built by [Paul Emakpor](https://github.com/Emakporpaul) — born from a rainy morning and a pile of wet clothes.
+Built by [Paul Emakpor](https://github.com/Emakporpaul) — ML/AI Engineer.
